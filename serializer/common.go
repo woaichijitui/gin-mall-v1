@@ -6,3 +6,8 @@ type Response struct {
 	Msg    string      `json:"msg" form:"msg"`
 	Error  string      `json:"error" form:"error"`
 }
+
+type TokenData struct {
+	User  interface{} `json:"user"`
+	Token string      `json:"token"`
+}

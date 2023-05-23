@@ -21,6 +21,7 @@ const (
 	Active       string = "active" //激活用户
 )
 
+// 密码加密
 func (u *User) Setpassword(password string) (err error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), PasswordCost)
 
@@ -29,5 +30,13 @@ func (u *User) Setpassword(password string) (err error) {
 	}
 	u.PasswordDigest = string(bytes)
 	return nil
+
+}
+
+// 验证密码
+func (u *User) CheckPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(u.PasswordDigest), []byte(password))
+
+	return err == nil
 
 }

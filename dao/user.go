@@ -27,7 +27,7 @@ func (userDao *UserDao) ExitOrNotByUserName(userName string) (user *model.User, 
 	err = userDao.DB.Model(&model.User{}).Where("user_name = ?", userName).First(&user).Count(&count).Error
 
 	if count == 1 {
-		return nil, true, err
+		return user, true, err
 	}
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, true, err
@@ -38,4 +38,16 @@ func (userDao *UserDao) ExitOrNotByUserName(userName string) (user *model.User, 
 // 创建一个用户
 func (userDao *UserDao) CreateUser(user *model.User) (err error) {
 	return userDao.Model(&model.User{}).Create(user).Error
+}
+
+// 根据id查询用户
+func (userDao *UserDao) GetUserByUId(id uint) (user *model.User, err error) {
+
+	err = userDao.Model(&model.User{}).Where("id = ?", id).First(&user).Error
+	return
+}
+
+// 通过id更新用户属性
+func (userDao *UserDao) UpdateUserById(uId uint, user *model.User) error {
+	return userDao.Model(&model.User{}).Where("id = ?", uId).Updates(user).Error
 }

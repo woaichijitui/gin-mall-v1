@@ -1,11 +1,9 @@
 package routes
 
 import (
-	"gin-mall/api"
-	"github.com/gin-gonic/gin"
-)
-import (
+	api "gin-mall/api/v1"
 	"gin-mall/middleware"
+	"github.com/gin-gonic/gin"
 )
 
 func NewRouter() *gin.Engine {
@@ -20,9 +18,16 @@ func NewRouter() *gin.Engine {
 	{
 		v1.GET("ping", func(context *gin.Context) {
 			context.JSON(200, "sussuce")
-		})
+		}) //测试
 
 		v1.POST("user/register", api.UserRegister)
+		v1.POST("user/login", api.UserLogin)
+
+		authed := v1.Group("/") //登录保护
+		{
+			authed.PUT("/user", api.UserUpdate)
+			authed.POST("/avatar", api.UpdateAvatar)
+		}
 	}
 	return route
 }
