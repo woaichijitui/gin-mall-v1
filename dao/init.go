@@ -30,7 +30,7 @@ func Database(connRead, connWrite string) {
 		DisableDatetimePrecision: true,
 		DontSupportRenameIndex:   true,
 		DontSupportRenameColumn:  true,
-		
+
 		SkipInitializeWithVersion: false,
 	}), &gorm.Config{
 		Logger:                                   ormlogger,
@@ -66,9 +66,9 @@ func Database(connRead, connWrite string) {
 		Policy:   dbresolver.RandomPolicy{},                                      // sources/replicas 负载均衡策略))
 	}))
 
-	Migration()
+	//Migration()
 }
-func NewDatabase(context context.Context) *gorm.DB {
+func NewDBClient(context context.Context) *gorm.DB {
 
 	db := DB
 	return db.WithContext(context)
