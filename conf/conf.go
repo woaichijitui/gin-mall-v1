@@ -2,7 +2,9 @@ package conf
 
 import (
 	"fmt"
+	"gin-mall/cache"
 	"gin-mall/dao"
+	"gin-mall/pkg/util"
 	"gopkg.in/ini.v1"
 )
 
@@ -50,7 +52,6 @@ func Init() {
 	}
 
 	//2、读取配置信息
-	LoadRedis(file)
 	LoadService(file)
 	LoadMysql(file)
 	LoadQiniu(file)
@@ -63,6 +64,12 @@ func Init() {
 	connRead := DbUser + ":" + DbPassWord + "@tcp(" + DbHost + ":" + DbPort + ")/" + DbName + "?charset=utf8&parseTime=true"
 	connWrite := DbUser + ":" + DbPassWord + "@tcp(" + DbHost + ":" + DbPort + ")/" + DbName + "?charset=utf8&parseTime=true"
 	dao.Database(connRead, connWrite)
+
+	// log init
+	util.Init()
+
+	//cache init
+	cache.Init()
 }
 
 func LoadService(file *ini.File) {

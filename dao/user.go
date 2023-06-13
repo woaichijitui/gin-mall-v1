@@ -40,7 +40,7 @@ func (userDao *UserDao) CreateUser(user *model.User) (err error) {
 	return userDao.Model(&model.User{}).Create(user).Error
 }
 
-// 根据id查询用户
+// 根据id 获取user
 func (userDao *UserDao) GetUserByUId(id uint) (user *model.User, err error) {
 
 	err = userDao.Model(&model.User{}).Where("id = ?", id).First(&user).Error
@@ -48,6 +48,7 @@ func (userDao *UserDao) GetUserByUId(id uint) (user *model.User, err error) {
 }
 
 // 通过id更新用户属性
+// 包括零值的字段
 func (userDao *UserDao) UpdateUserById(uId uint, user *model.User) error {
-	return userDao.Model(&model.User{}).Where("id = ?", uId).Updates(user).Error
+	return userDao.Model(&model.User{}).Select("*").Where("id = ?", uId).Updates(user).Error
 }

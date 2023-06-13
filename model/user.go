@@ -8,7 +8,7 @@ import "golang.org/x/crypto/bcrypt"
 type User struct {
 	gorm.Model
 	UserName       string `gorm:"unique"`
-	Email          string
+	Email          string `gorm:"force"`
 	PasswordDigest string
 	NickName       string
 	Status         string

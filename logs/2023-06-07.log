@@ -1,0 +1,3 @@
+time="2023-06-07 11:34:12" level=debug msg="dial tcp 172.16.0.2:6379: connectex: No connection could be made because the target machine actively refused it."
+time="2023-06-07 11:36:09" level=debug msg="dial tcp 172.16.0.2:6379: connectex: No connection could be made because the target machine actively refused it."
+time="2023-06-07 11:38:15" level=debug msg="dial tcp 172.16.0.2:6379: connectex: No connection could be made because the target machine actively refused it."

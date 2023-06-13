@@ -11,7 +11,7 @@ var Encrypt *Encryption
 
 // AES 加密算法
 type Encryption struct {
-	key string
+	key string //加密用户余额的密钥
 }
 
 func init() {
